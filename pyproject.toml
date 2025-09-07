@@ -1,0 +1,27 @@
+[project]
+name = "ce-playground"
+description = "Self-hosted Compiler Explorer with Pixi"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+
+[[project.authors]]
+name = "hingebase"
+email = "zcliu@pku.edu.cn"
+
+[project.urls]
+Homepage = "https://github.com/hingebase/ce-playground"
+"Source Code" = "https://github.com/hingebase/ce-playground"
+"Issue Tracker" = "https://github.com/hingebase/ce-playground/issues"
+
+[tool.basedpyright]
+strict = ["."]
+typeCheckingMode = "off"
+
+[tool.ruff]
+line-length = 79
+preview = true
+
+[tool.ruff.lint]
+ignore = ["INP001"]
+select = ["ALL"]

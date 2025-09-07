@@ -1,0 +1,13 @@
+compilers={{ compiler | join(":") }}
+defaultCompiler={{ defaultCompiler }}
+# We use the llvm demangler for all c/c++ compilers, as c++filt tends to lag behind
+demangler={{ demangler }}
+objdumper={{ objdumper }}
+needsMulti=false
+
+llvmDisassembler={{ llvmDisassembler }}
+{% for k, v in compiler | items -%}
+{% for k2, v2 in v | items %}
+compiler.{{ k }}.{{ k2 }}={{ v2 }}
+{%- endfor %}
+{% endfor %}

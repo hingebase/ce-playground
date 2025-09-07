@@ -1,0 +1,15 @@
+compilers=&numba
+compilerType=numba
+defaultCompiler={{ defaultCompiler }}
+demangler={{ demangler }}
+interpreted=true
+needsMulti=false
+versionFlag=etc/config/versionFlag.py
+versionRe=^.*Numba Version.*$
+
+group.numba.compilers={{ compiler | join(":") }}
+{% for k, v in compiler | items -%}
+{% for k2, v2 in v | items %}
+compiler.{{ k }}.{{ k2 }}={{ v2 }}
+{%- endfor %}
+{% endfor %}
