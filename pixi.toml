@@ -12,10 +12,11 @@ gcc = ["gcc", "jq", "coreutils"]
 intel = ["intel", "jq"]
 msvc = ["msvc", "jq"]
 nb057 = ["numba", "nb057", "pixi", "pyomp"]
-nb058 = ["numba", "nb058", "pixi"]
-nb059 = ["numba", "nb059", "pixi"]
-nb060 = ["numba", "nb060", "pixi"]
+nb058 = ["numba", "nb058", "pixi", "pyomp"]
+nb059 = ["numba", "nb059", "pixi", "pyomp"]
+nb060 = ["numba", "nb060", "pixi", "pyomp"]
 nb061 = ["numba", "nb061", "pixi"]
+nb062 = ["numba", "nb062", "pixi"]
 cuda = ["cuda"]
 
 [feature.coreutils.target.win-64.dependencies]
@@ -70,7 +71,7 @@ env = { NODE_ENV = "production" }
 nodejs = "24.*"
 
 [feature.pixi.dependencies]
-pixi = "==0.50.2"
+pixi = ">=0.50.2"
 
 [feature.prepare.tasks._prepare]
 cmd = 'pixi i -a && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'
@@ -129,24 +130,12 @@ vs_win-64 = ">=2022.12.0"
 
 ## Numba
 
-[feature.numba]
-channels = ["conda-forge", "numba"]
-
 [feature.numba.dependencies]
 conda = "<24.9.0"
 conda-build = "*"
 libblas = { build = "*_mkl" }
 psutil = "*"
 scipy = "*"
-
-[feature.numba.target.linux-64.dependencies]
-intel-cmplr-lib-rt = "*"
-
-[feature.numba.target.osx-64.dependencies]
-icc_rt = { channel = "numba" }
-
-[feature.numba.target.win-64.dependencies]
-intel-cmplr-lib-rt = "*"
 
 [feature.nb057]
 channels = ["conda-forge", "numba"]
@@ -164,23 +153,47 @@ numba = { version = "==0.57.1", channel = "numba" }
 llvmlite = { channel = "numba" }
 
 [feature.nb058]
-channels = ["numba"]
+channels = ["conda-forge", "numba"]
 
-[feature.nb058.dependencies]
+[feature.nb058.target.linux-64.dependencies]
+numba = { version = "==0.58.1", channel = "conda-forge" }
+llvmlite = { channel = "conda-forge" }
+
+[feature.nb058.target.osx-64.dependencies]
+numba = { version = "==0.58.1", channel = "numba" }
+llvmlite = { channel = "numba" }
+
+[feature.nb058.target.win-64.dependencies]
 numba = { version = "==0.58.1", channel = "numba" }
 llvmlite = { channel = "numba" }
 
 [feature.nb059]
-channels = ["numba"]
+channels = ["conda-forge", "numba"]
 
-[feature.nb059.dependencies]
+[feature.nb059.target.linux-64.dependencies]
+numba = { version = "==0.59.1", channel = "conda-forge" }
+llvmlite = { channel = "conda-forge" }
+
+[feature.nb059.target.osx-64.dependencies]
+numba = { version = "==0.59.1", channel = "numba" }
+llvmlite = { channel = "numba" }
+
+[feature.nb059.target.win-64.dependencies]
 numba = { version = "==0.59.1", channel = "numba" }
 llvmlite = { channel = "numba" }
 
 [feature.nb060]
-channels = ["numba"]
+channels = ["conda-forge", "numba"]
 
-[feature.nb060.dependencies]
+[feature.nb060.target.linux-64.dependencies]
+numba = { version = "==0.60.0", channel = "conda-forge" }
+llvmlite = { channel = "conda-forge" }
+
+[feature.nb060.target.osx-64.dependencies]
+numba = { version = "==0.60.0", channel = "numba" }
+llvmlite = { channel = "numba" }
+
+[feature.nb060.target.win-64.dependencies]
 numba = { version = "==0.60.0", channel = "numba" }
 llvmlite = { channel = "numba" }
 
@@ -188,11 +201,24 @@ llvmlite = { channel = "numba" }
 channels = ["numba"]
 
 [feature.nb061.dependencies]
-numba = { version = "0.61.*", channel = "numba" }
+numba = { version = "==0.61.2", channel = "numba" }
+llvmlite = { channel = "numba" }
+
+[feature.nb062]
+channels = ["numba"]
+
+[feature.nb062.dependencies]
+numba = { version = "0.62.*", channel = "numba" }
 llvmlite = { channel = "numba" }
 
 [feature.pyomp]
-channels = ["Python-for-HPC"]
+channels = ["conda-forge", "numba", "Python-for-HPC"]
 
 [feature.pyomp.target.linux-64.dependencies]
-pyomp = { version = ">=0.2.0", channel = "Python-for-HPC" }
+pyomp = { version = ">=0.3.0", channel = "Python-for-HPC" }
+
+[feature.pyomp.target.osx-64.dependencies]
+icc_rt = { channel = "numba" }
+
+[feature.pyomp.target.win-64.dependencies]
+intel-cmplr-lib-rt = { channel = "conda-forge" }
