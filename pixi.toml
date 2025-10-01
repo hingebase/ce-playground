@@ -131,7 +131,6 @@ vs_win-64 = ">=2022.12.0"
 ## Numba
 
 [feature.numba.dependencies]
-conda = "<24.9.0"
 conda-build = "*"
 libblas = { build = "*_mkl" }
 psutil = "*"
@@ -139,86 +138,50 @@ scipy = "*"
 
 [feature.nb057]
 channels = ["conda-forge", "numba"]
-
-[feature.nb057.target.linux-64.dependencies]
-numba = { version = "==0.57.1", channel = "conda-forge" }
-llvmlite = { channel = "conda-forge" }
-
-[feature.nb057.target.osx-64.dependencies]
-numba = { version = "==0.57.1", channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.nb057.target.win-64.dependencies]
-numba = { version = "==0.57.1", channel = "numba" }
-llvmlite = { channel = "numba" }
+target.linux-64.dependencies.numba = { version = "==0.57.1", channel = "conda-forge" }
+target.osx-64.dependencies.numba = { version = "==0.57.1", channel = "numba" }
+target.win-64.dependencies.numba = { version = "==0.57.1", channel = "numba" }
 
 [feature.nb058]
 channels = ["conda-forge", "numba"]
-
-[feature.nb058.target.linux-64.dependencies]
-numba = { version = "==0.58.1", channel = "conda-forge" }
-llvmlite = { channel = "conda-forge" }
-
-[feature.nb058.target.osx-64.dependencies]
-numba = { version = "==0.58.1", channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.nb058.target.win-64.dependencies]
-numba = { version = "==0.58.1", channel = "numba" }
-llvmlite = { channel = "numba" }
+target.linux-64.dependencies.numba = { version = "==0.58.1", channel = "conda-forge" }
+target.osx-64.dependencies.numba = { version = "==0.58.1", channel = "numba" }
+target.win-64.dependencies.numba = { version = "==0.58.1", channel = "numba" }
 
 [feature.nb059]
 channels = ["conda-forge", "numba"]
-
-[feature.nb059.target.linux-64.dependencies]
-numba = { version = "==0.59.1", channel = "conda-forge" }
-llvmlite = { channel = "conda-forge" }
-
-[feature.nb059.target.osx-64.dependencies]
-numba = { version = "==0.59.1", channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.nb059.target.win-64.dependencies]
-numba = { version = "==0.59.1", channel = "numba" }
-llvmlite = { channel = "numba" }
+target.linux-64.dependencies.numba = { version = "==0.59.1", channel = "conda-forge" }
+target.osx-64.dependencies.numba = { version = "==0.59.1", channel = "numba" }
+target.win-64.dependencies.numba = { version = "==0.59.1", channel = "numba" }
 
 [feature.nb060]
 channels = ["conda-forge", "numba"]
-
-[feature.nb060.target.linux-64.dependencies]
-numba = { version = "==0.60.0", channel = "conda-forge" }
-llvmlite = { channel = "conda-forge" }
-
-[feature.nb060.target.osx-64.dependencies]
-numba = { version = "==0.60.0", channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.nb060.target.win-64.dependencies]
-numba = { version = "==0.60.0", channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.nb061]
-channels = ["numba"]
+target.linux-64.dependencies.numba = { version = "==0.60.0", channel = "conda-forge" }
+target.osx-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
+target.win-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
 
 [feature.nb061.dependencies]
-numba = { version = "==0.61.2", channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.nb062]
-channels = ["numba"]
+conda = ">=25.9.0"
+numba = "==0.61.2"
 
 [feature.nb062.dependencies]
-numba = { version = "0.62.*", channel = "numba" }
-llvmlite = { channel = "numba" }
+conda = ">=25.9.0"
+numba = "0.62.*"
 
 [feature.pyomp]
 channels = ["conda-forge", "numba", "Python-for-HPC"]
 
 [feature.pyomp.target.linux-64.dependencies]
+conda = { version = ">=25.9.0", channel = "conda-forge" }
+llvmlite = { channel = "conda-forge" }
 pyomp = { version = ">=0.3.0", channel = "Python-for-HPC" }
 
 [feature.pyomp.target.osx-64.dependencies]
+conda = { version = "<24.9.0", channel = "conda-forge" }
 icc_rt = { channel = "numba" }
+llvmlite = { channel = "numba" }
 
 [feature.pyomp.target.win-64.dependencies]
+conda = { version = "<24.9.0", channel = "conda-forge" }
 intel-cmplr-lib-rt = { channel = "conda-forge" }
+llvmlite = { channel = "numba" }
