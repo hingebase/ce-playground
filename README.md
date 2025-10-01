@@ -1,5 +1,7 @@
 # CE-Playground
 
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/hingebase/ce-playground/update-lockfiles.yml?label=ci&logo=github)](https://github.com/hingebase/ce-playground/actions)
+![Apache-2.0 License](https://img.shields.io/github/license/hingebase/ce-playground)
 ![Pixi](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prefix-dev/pixi/main/assets/badge/v0.json)
 ![basedpyright](https://img.shields.io/badge/basedpyright-checked-42b983)
 ![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)
