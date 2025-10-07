@@ -2,7 +2,7 @@
 name = "ce-playground"
 description = "Self-hosted Compiler Explorer with Pixi"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 license = "Apache-2.0"
 
 [[project.authors]]
