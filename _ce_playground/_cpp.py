@@ -15,11 +15,13 @@
 __all__ = ["local_properties"]
 
 import sys
-from collections.abc import Mapping
 from pathlib import Path
-from typing import ClassVar, override
+from typing import TYPE_CHECKING, ClassVar, override
 
 from . import _c, _common
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 def local_properties(

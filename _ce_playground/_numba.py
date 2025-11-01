@@ -18,13 +18,15 @@ import asyncio
 import json
 import shutil
 import sys
-from collections.abc import Iterable, Mapping
 from pathlib import Path
-from typing import TypedDict, cast
+from typing import TYPE_CHECKING, TypedDict, cast
 
 import packaging.version
 
 from . import _common
+
+if TYPE_CHECKING:
+    from collections.abc import Iterable, Mapping
 
 _PATCH = b"""\
 import os
@@ -53,7 +55,7 @@ if __name__ == "__main__" and os.getenv("PIXI_ENVIRONMENT_NAME") == "start":
 """
 
 
-def local_properties(info: "_Info", demangler: str) -> None:
+def local_properties(info: _Info, demangler: str) -> None:
     with (
         Path("compiler-explorer/etc/scripts/numba_wrapper.py").open("r+b")
     ) as f:

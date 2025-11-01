@@ -18,10 +18,12 @@ import asyncio
 import os
 import shutil
 import sys
-from collections.abc import Mapping
-from typing import Literal, Required, TypedDict
+from typing import TYPE_CHECKING, Literal, Required, TypedDict
 
 import minijinja
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 type _Boolean = Literal["true", "false"]
 

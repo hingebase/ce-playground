@@ -20,11 +20,13 @@ import re
 import shlex
 import subprocess  # noqa: S404
 import sys
-from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import ClassVar, override
+from typing import TYPE_CHECKING, ClassVar, override
 
 from . import _common
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
 
 
 def local_properties(envs: Mapping[str, Mapping[str, str]]) -> _common.Context:

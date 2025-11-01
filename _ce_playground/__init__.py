@@ -17,9 +17,12 @@ __all__ = ["main"]
 import asyncio
 import json
 import sys
-from collections.abc import Mapping
+from typing import TYPE_CHECKING
 
 from . import _c, _common, _cpp, _numba, _unpack
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
 
 
 def main() -> None:
