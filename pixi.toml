@@ -1,7 +1,7 @@
 [workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "win-64"]
-requires-pixi = ">=0.50.2"
+requires-pixi = ">=0.59.0"
 
 [environments]
 prepare = ["prepare", "pixi", "coreutils"]
@@ -71,7 +71,7 @@ env = { NODE_ENV = "production" }
 nodejs = "24.*"
 
 [feature.pixi.dependencies]
-pixi = ">=0.50.2"
+pixi = ">=0.59.0"
 
 [feature.prepare.tasks._prepare]
 cmd = 'pixi i -a && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'
