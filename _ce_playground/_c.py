@@ -132,7 +132,6 @@ class IntelLLVM(Clang):
     @override
     def compiler(self) -> _common.Compiler:
         obj = super().compiler()
-        obj["intelAsm"] = "-masm=intel"
         self._include(obj, "opt/compiler/include")
         if sys.platform == "win32":
             self._include(obj, "include")
@@ -140,6 +139,7 @@ class IntelLLVM(Clang):
             obj["compilerType"] = "win32-vc"
         else:
             obj["compilerType"] = "clang-intel"
+            obj["intelAsm"] = "-masm=intel"
             args = obj.get("options", "").split()
             args.append(f"--sysroot={self.env['CONDA_BUILD_SYSROOT']}")
             obj["options"] = shlex.join(args)
@@ -149,7 +149,7 @@ class IntelLLVM(Clang):
     if sys.platform == "win32":
         @override
         def options(self) -> str:
-            return "-Qstd:c18"
+            return "-masm=intel -Qstd:c18"
 
     def _include(self, obj: _common.Compiler, path: LiteralString) -> None:
         include = Path(self.env["CONDA_PREFIX"], path)

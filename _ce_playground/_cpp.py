@@ -55,11 +55,13 @@ class _IntelLLVM(_Clang, _c.IntelLLVM):
     if sys.platform == "win32":
         @override
         def options(self) -> str:
-            return "-EHsc -std:c++latest -utf-8"
+            return "-EHsc -masm=intel -std:c++latest -utf-8"
 
 
 class _MSVC(_IntelLLVM, _c.MSVC):
-    pass
+    @override
+    def options(self) -> str:
+        return "-EHsc -std:c++latest -utf-8"
 
 
 _compilers: dict[str, type[_GNU]] = {
