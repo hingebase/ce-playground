@@ -21,7 +21,7 @@ import shlex
 import subprocess  # noqa: S404
 import sys
 from pathlib import Path
-from typing import TYPE_CHECKING, ClassVar, override
+from typing import TYPE_CHECKING, ClassVar, LiteralString, override
 
 from . import _common
 
@@ -133,12 +133,9 @@ class IntelLLVM(Clang):
     def compiler(self) -> _common.Compiler:
         obj = super().compiler()
         obj["intelAsm"] = "-masm=intel"
-        include = Path(self.env["CONDA_PREFIX"], "opt/compiler/include")
-        if include.is_dir():
-            obj["includePath"] = os.pathsep.join(
-                filter(None, [str(include), obj.get("includePath", "")]),
-            )
+        self._include(obj, "opt/compiler/include")
         if sys.platform == "win32":
+            self._include(obj, "include")
             # https://github.com/compiler-explorer/compiler-explorer/issues/4940
             obj["compilerType"] = "win32-vc"
         else:
@@ -153,6 +150,13 @@ class IntelLLVM(Clang):
         @override
         def options(self) -> str:
             return "-Qstd:c18"
+
+    def _include(self, obj: _common.Compiler, path: LiteralString) -> None:
+        include = Path(self.env["CONDA_PREFIX"], path)
+        if include.is_dir():
+            obj["includePath"] = os.pathsep.join(
+                filter(None, [str(include), obj.get("includePath", "")]),
+            )
 
 
 class MSVC(IntelLLVM):
