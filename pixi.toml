@@ -17,6 +17,7 @@ nb059 = ["numba", "nb059", "pixi", "pyomp"]
 nb060 = ["numba", "nb060", "pixi", "pyomp"]
 nb061 = ["numba", "nb061", "pixi"]
 nb062 = ["numba", "nb062", "pixi"]
+nb063 = ["numba", "nb063", "pixi"]
 cuda = ["cuda"]
 
 [feature.coreutils.target.win-64.dependencies]
@@ -166,7 +167,14 @@ numba = "==0.61.2"
 
 [feature.nb062.dependencies]
 conda = ">=25.9.0"
-numba = "0.62.*"
+numba = "==0.62.1"
+
+[feature.nb063]
+platforms = ["linux-64", "win-64"]
+
+[feature.nb063.dependencies]
+conda = ">=25.9.0"
+numba = "0.63.*"
 
 [feature.pyomp]
 channels = ["conda-forge", "numba", "Python-for-HPC"]
