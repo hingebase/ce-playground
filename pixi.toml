@@ -72,7 +72,7 @@ env = { NODE_ENV = "production" }
 nodejs = "24.*"
 
 [feature.pixi.dependencies]
-pixi = ">=0.59.0"
+pixi = "==0.59.0"
 
 [feature.prepare.tasks._prepare]
 cmd = 'pixi i -a && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'
