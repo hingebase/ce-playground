@@ -1,17 +1,17 @@
 name: Update lockfiles
 
-permissions:
-  contents: write
-  pull-requests: write
-
 on:
-  workflow_dispatch:
   schedule:
     - cron: 0 5 1 * *
 
+permissions: read-all
+
 jobs:
   pixi-update:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v6
       - name: Set up Pixi
