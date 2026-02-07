@@ -101,6 +101,7 @@ platforms = ["linux-64", "win-64"]
 gxx_linux-64 = ">=14.1.0"
 
 [feature.gcc.target.win-64.dependencies]
+binutils_win-64 = "==2.45.0"
 gxx_win-64 = ">=14.1.0"
 m2-findutils = "*"
 m2-sed = "*"
