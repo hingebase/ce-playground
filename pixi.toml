@@ -15,9 +15,9 @@ nb057 = ["numba", "nb057", "pixi", "pyomp"]
 nb058 = ["numba", "nb058", "pixi", "pyomp"]
 nb059 = ["numba", "nb059", "pixi", "pyomp"]
 nb060 = ["numba", "nb060", "pixi", "pyomp"]
-nb061 = ["numba", "nb061", "pixi"]
-nb062 = ["numba", "nb062", "pixi"]
-nb063 = ["numba", "nb063", "pixi"]
+nb061 = ["numba", "nb061", "pixi", "pyomp"]
+nb062 = ["numba", "nb062", "pixi", "pyomp"]
+nb063 = ["numba", "nb063", "pixi", "pyomp"]
 cuda = ["cuda"]
 
 [feature.coreutils.target.win-64.dependencies]
@@ -161,20 +161,23 @@ target.linux-64.dependencies.numba = { version = "==0.60.0", channel = "conda-fo
 target.osx-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
 target.win-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
 
-[feature.nb061.dependencies]
-conda = ">=25.9.0"
-numba = "==0.61.2"
+[feature.nb061]
+channels = ["conda-forge", "numba"]
+target.linux-64.dependencies.numba = { version = "==0.61.2", channel = "conda-forge" }
+target.osx-64.dependencies.numba = { version = "==0.61.2", channel = "numba" }
+target.win-64.dependencies.numba = { version = "==0.61.2", channel = "numba" }
 
-[feature.nb062.dependencies]
-conda = ">=25.9.0"
-numba = "==0.62.1"
+[feature.nb062]
+channels = ["conda-forge", "numba"]
+target.linux-64.dependencies.numba = { version = "==0.62.1", channel = "conda-forge" }
+target.osx-64.dependencies.numba = { version = "==0.62.1", channel = "numba" }
+target.win-64.dependencies.numba = { version = "==0.62.1", channel = "numba" }
 
 [feature.nb063]
+channels = ["conda-forge", "numba"]
 platforms = ["linux-64", "win-64"]
-
-[feature.nb063.dependencies]
-conda = ">=25.9.0"
-numba = "0.63.*"
+target.linux-64.dependencies.numba = { version = "0.63.*", channel = "conda-forge" }
+target.win-64.dependencies.numba = { version = "0.63.*", channel = "numba" }
 
 [feature.pyomp]
 channels = ["conda-forge", "numba", "Python-for-HPC"]
@@ -182,7 +185,7 @@ channels = ["conda-forge", "numba", "Python-for-HPC"]
 [feature.pyomp.target.linux-64.dependencies]
 conda = { version = ">=25.9.0", channel = "conda-forge" }
 llvmlite = { channel = "conda-forge" }
-pyomp = { version = ">=0.3.0", channel = "Python-for-HPC" }
+pyomp = { version = ">=0.3.2", channel = "Python-for-HPC" }
 
 [feature.pyomp.target.osx-64.dependencies]
 conda = { version = "<24.9.0", channel = "conda-forge" }
