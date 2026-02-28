@@ -3,6 +3,9 @@ channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "win-64"]
 requires-pixi = ">=0.59.0"
 
+[system-requirements]
+macos = "10.15"
+
 [environments]
 prepare = ["prepare", "pixi", "coreutils"]
 setup = ["jinja", "pixi"]

@@ -21,9 +21,9 @@ Experimental self-hosted [Compiler Explorer][1].
 ## Prerequisites
 | OS | Arch | Installed software |
 | :-: | :-: | :-: |
-| Linux | x86-64 | glibc |
-| macOS | x86-64 | Xcode or [Xcode Command Line Tools][2] |
-| Windows 10/11 | x86-64 | Visual Studio or [Microsoft C++ Build Tools][3] |
+| Linux (kernel version 4.18 or later) | x86-64 | glibc 2.28 or later |
+| macOS 10.15 or later | x86-64 | Xcode or [Xcode Command Line Tools][2] |
+| Windows 10 (Windows Server 2016) or later | x86-64 | Visual Studio or [Microsoft C++ Build Tools][3] |
 
 ## Usage
 1. Download pre-compiled Compiler Explorer from its [GitHub Actions][4] to the
