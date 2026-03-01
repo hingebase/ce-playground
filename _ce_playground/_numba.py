@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, TypedDict, cast
 
 import packaging.version
+import rattler.platform
 
 from . import _common
 
@@ -70,13 +71,14 @@ def local_properties(info: _Info, demangler: str) -> None:
         "scripts/_numba_s.py",
         "compiler-explorer/etc/config/versionFlag.py",
     )
+    platform = str(rattler.Platform.current())
     compiler: dict[str, _common.Compiler] = {
         env["name"]: {
             "name": "",
             "exe": _common.which("python", {"PATH": _path(env["prefix"])}),
         }
         for env in info["environments_info"]
-        if env["name"].startswith("nb")
+        if env["name"].startswith("nb") and platform in env["platforms"]
     }
     for k, v in asyncio.run(_versions(compiler)).items():
         for pkg in cast("Iterable[_Package]", json.loads(v.result())):
@@ -103,6 +105,7 @@ def local_properties(info: _Info, demangler: str) -> None:
 
 class _Environment(TypedDict):
     name: str
+    platforms: list[rattler.platform.PlatformLiteral]
     prefix: str
 
 
