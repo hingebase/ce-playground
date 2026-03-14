@@ -120,7 +120,7 @@ class Clang(GNU):
             )
             for key in "includePath", "libPath":
                 obj[key] = os.pathsep.join(
-                    map(
+                    map(  # pyrefly: ignore[no-matching-overload]
                         os.path.normpath,
                         self.env[key[:-4].upper()].split(os.pathsep),
                     ),
