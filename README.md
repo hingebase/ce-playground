@@ -4,6 +4,7 @@
 ![Apache-2.0 License](https://img.shields.io/github/license/hingebase/ce-playground)
 ![Pixi](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/prefix-dev/pixi/main/assets/badge/v0.json)
 ![basedpyright](https://img.shields.io/endpoint?url=https://docs.basedpyright.com/latest/badge.json)
+![pyrefly](https://img.shields.io/endpoint?url=https://pyrefly.org/badge.json)
 ![ty](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ty/main/assets/badge/v0.json)
 ![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)
 
