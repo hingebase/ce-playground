@@ -1,7 +1,7 @@
 [workspace]
 channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "win-64"]
-requires-pixi = ">=0.59.0"
+requires-pixi = ">=0.63.0"
 
 [system-requirements]
 macos = "10.15"
@@ -31,7 +31,7 @@ m2-coreutils = "*"
 platforms = ["linux-64", "win-64"]
 
 [feature.cuda.system-requirements]
-cuda = "12"
+cuda = "13"
 
 [feature.cuda.dependencies]
 cuda-cudart = "*"
@@ -77,7 +77,7 @@ env = { NODE_ENV = "production" }
 nodejs = "24.*"
 
 [feature.pixi.dependencies]
-pixi = "==0.59.0"
+pixi = ">=0.63.0"
 
 [feature.prepare.tasks._prepare]
 cmd = 'pixi i -a && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'
@@ -97,7 +97,7 @@ clangxx_osx-64 = ">=19.1.0"
 
 [feature.clang.target.win-64.dependencies]
 clangxx_win-64 = ">=19.1.0"
-vs_win-64 = ">=2022.12.0"
+vs_win-64 = ">=2022.14.0"
 
 [feature.gcc]
 platforms = ["linux-64", "win-64"]
@@ -127,13 +127,13 @@ dpcpp_linux-64 = ">=2025.0.0"
 
 [feature.intel.target.win-64.dependencies]
 dpcpp_win-64 = ">=2025.0.0"
-vs_win-64 = ">=2022.12.0"
+vs_win-64 = ">=2022.14.0"
 
 [feature.msvc]
 platforms = ["win-64"]
 
 [feature.msvc.dependencies]
-vs_win-64 = ">=2022.12.0"
+vs_win-64 = ">=2022.14.0"
 
 ## Numba
 
@@ -180,13 +180,11 @@ platforms = ["linux-64", "win-64"]
 numba = "==0.63.1"
 
 [feature.nb064]
-channels = ["conda-forge", "numba"]
 platforms = ["linux-64", "win-64"]
 
 [feature.nb064.dependencies]
-conda = { version = ">=25.9.0", channel = "conda-forge" }
-numba = { version = "0.64.*", channel = "numba" }
-llvmlite = { channel = "numba" }
+conda = ">=25.9.0"
+numba = "0.64.*"
 
 [feature.pyomp]
 channels = ["conda-forge", "Python-for-HPC"]
