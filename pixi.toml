@@ -7,8 +7,8 @@ requires-pixi = ">=0.63.0"
 macos = "10.15"
 
 [environments]
+default = ["jinja", "pixi"]
 prepare = ["prepare", "pixi", "coreutils"]
-setup = ["jinja", "pixi"]
 start = ["node"]
 clang = ["clang", "jq"]
 gcc = ["gcc", "jq", "coreutils"]
