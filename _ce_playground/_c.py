@@ -119,10 +119,10 @@ class Clang(GNU):
                 demanglerType="win32",
             )
             for key in "includePath", "libPath":
-                obj[key] = os.pathsep.join(
-                    map(  # pyrefly: ignore[no-matching-overload]
+                obj[key] = os.pathsep.join(  # ty: ignore[no-matching-overload]
+                    map(
                         os.path.normpath,
-                        self.env[key[:-4].upper()].split(os.pathsep),
+                        self.env[key[:-4].upper()].split(os.pathsep),  # pyrefly: ignore[bad-argument-type]
                     ),
                 )
         return obj

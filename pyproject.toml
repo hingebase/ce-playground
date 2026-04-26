@@ -34,8 +34,4 @@ select = ["ALL"]
 max-doc-length = 72
 
 [tool.ty.rules]
-division-by-zero = "warn"
-possibly-missing-attribute = "warn"
-possibly-missing-import = "warn"
-possibly-unresolved-reference = "warn"
-unsupported-dynamic-base = "warn"
+all = "error"
