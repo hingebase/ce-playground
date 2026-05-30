@@ -122,7 +122,7 @@ class Clang(GNU):
                 obj[key] = os.pathsep.join(  # ty: ignore[no-matching-overload]
                     map(
                         os.path.normpath,
-                        self.env[key[:-4].upper()].split(os.pathsep),  # pyrefly: ignore[bad-argument-type]
+                        self.env[key[:-4].upper()].split(os.pathsep),
                     ),
                 )
         return obj

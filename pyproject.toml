@@ -20,6 +20,9 @@ reportUnnecessaryTypeIgnoreComment = "warning"
 strict = ["."]
 typeCheckingMode = "off"
 
+[tool.pyrefly]
+preset = "strict"
+
 [tool.ruff]
 line-length = 79
 preview = true
