@@ -119,7 +119,7 @@ class Clang(GNU):
                 demanglerType="win32",
             )
             for key in "includePath", "libPath":
-                obj[key] = os.pathsep.join(  # ty: ignore[no-matching-overload]
+                obj[key] = os.pathsep.join(
                     map(
                         os.path.normpath,
                         self.env[key[:-4].upper()].split(os.pathsep),
