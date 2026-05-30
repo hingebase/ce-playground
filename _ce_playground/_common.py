@@ -20,14 +20,14 @@ import shutil
 import sys
 from typing import TYPE_CHECKING, Literal, Required, TypedDict
 
-import minijinja
+from minijinja import Environment, load_from_path
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
 type _Boolean = Literal["true", "false"]
 
-env = minijinja.Environment(minijinja.load_from_path("templates"))
+env: Environment = Environment(load_from_path("templates"))
 
 
 class Compiler(TypedDict, total=False):
