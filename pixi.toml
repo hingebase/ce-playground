@@ -74,8 +74,14 @@ cwd = "compiler-explorer"
 depends-on = ["_setup"]
 env = { NODE_ENV = "production" }
 
-[feature.node.dependencies]
+[feature.node.target.linux-64.dependencies]
+nodejs = "26.*"
+
+[feature.node.target.osx-64.dependencies]
 nodejs = "24.*"
+
+[feature.node.target.win-64.dependencies]
+nodejs = "26.*"
 
 [feature.pixi]
 channels = ["conda-forge", "https://prefix.dev/github-releases"]
@@ -131,13 +137,13 @@ dpcpp_linux-64 = ">=2025.0.0"
 
 [feature.intel.target.win-64.dependencies]
 dpcpp_win-64 = ">=2025.0.0"
-vs_win-64 = ">=2022.14.0"
+vs_win-64 = ">=2026.1.0"
 
 [feature.msvc]
 platforms = ["win-64"]
 
 [feature.msvc.dependencies]
-vs_win-64 = ">=2022.14.0"
+vs_win-64 = ">=2026.1.0"
 
 ## Numba
 
