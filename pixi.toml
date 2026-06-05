@@ -74,8 +74,14 @@ cwd = "compiler-explorer"
 depends-on = ["_setup"]
 env = { NODE_ENV = "production" }
 
-[feature.node.dependencies]
+[feature.node.target.linux-64.dependencies]
+nodejs = "26.*"
+
+[feature.node.target.osx-64.dependencies]
 nodejs = "24.*"
+
+[feature.node.target.win-64.dependencies]
+nodejs = "26.*"
 
 [feature.pixi]
 channels = ["conda-forge", "https://prefix.dev/github-releases"]
