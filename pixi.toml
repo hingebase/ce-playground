@@ -42,6 +42,10 @@ cuda-nvvm-tools = "*"
 [feature.cuda.target.linux-64.dependencies]
 cuda-cudart-dev_linux-64 = "*"
 
+[feature.cuda.target.win-64.dependencies]
+# Only Library/lib/x64/cudadevrt.lib can be found by numba
+cuda-cudart-dev_win-64 = ">=13.0.48"
+
 [feature.jinja.tasks._setup]
 cmd = "rm -rf compiler-explorer && python -m _ce_playground"
 depends-on = ["_prepare"]
