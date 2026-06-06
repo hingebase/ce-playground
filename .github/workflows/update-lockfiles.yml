@@ -26,11 +26,12 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          add-paths: pixi.lock
           commit-message: Update Pixi lockfile
+          branch: update-pixi
+          delete-branch: true
+          base: main
+          sign-commits: true
           title: Update Pixi lockfile
           body-path: diff.md
-          branch: update-pixi
-          base: main
           labels: Pixi
-          delete-branch: true
-          add-paths: pixi.lock
