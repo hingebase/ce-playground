@@ -18,6 +18,8 @@ jobs:
         uses: prefix-dev/setup-pixi@v0
         with:
           run-install: false
+          # https://github.com/prefix-dev/setup-pixi/issues/186
+          pixi-version: v0.70.2
       - name: Update lockfiles
         run: |
           set -o pipefail
