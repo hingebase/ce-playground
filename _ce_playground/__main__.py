@@ -16,6 +16,7 @@ __all__ = ["main"]
 
 import asyncio
 import json
+import pathlib
 import sys
 from typing import TYPE_CHECKING
 
@@ -27,6 +28,13 @@ if TYPE_CHECKING:
 
 def main() -> None:
     _unpack.main()
+    pathlib.Path(
+        "compiler-explorer/etc/config/compiler-explorer.local.properties",
+    ).write_text(
+        "compileTimeoutMs=20000\n",
+        encoding="ascii",
+        newline="",
+    )
     info, tasks = asyncio.run(_envs())
     envs = {k: json.loads(v.result()) for k, v in tasks.items()}
     context = _c.local_properties(envs)
