@@ -18,7 +18,7 @@ import dataclasses
 import os
 import re
 import shlex
-import subprocess  # noqa: S404
+import subprocess  # ruff: ignore[suspicious-subprocess-import]
 import sys
 from pathlib import Path
 from typing import TYPE_CHECKING, ClassVar, LiteralString, override
@@ -76,7 +76,7 @@ class GNU:
 
     def compiler(self) -> _common.Compiler:
         exe = _common.which(self.env[self.exe_envvar], self.env)
-        stdout = subprocess.check_output(  # noqa: S603
+        stdout = subprocess.check_output(  # ruff: ignore[subprocess-without-shell-equals-true]
             self.version(exe),
             stderr=subprocess.STDOUT,
             encoding="ascii",

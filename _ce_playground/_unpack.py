@@ -27,7 +27,7 @@ def main() -> None:
                     h.extractall("compiler-explorer/static", filter="data")
             elif i.filename.endswith(".tar.xz"):
                 with f.open(i) as g, tarfile.open(mode="r|xz", fileobj=g) as h:
-                    h.extractall("compiler-explorer", filter=_filter)  # noqa: S202
+                    h.extractall("compiler-explorer", filter=_filter)  # ruff: ignore[tarfile-unsafe-members]
 
 
 def _filter(member: tarfile.TarInfo, path: str, /) -> tarfile.TarInfo | None:

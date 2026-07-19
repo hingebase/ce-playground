@@ -28,7 +28,7 @@ def _main() -> NoReturn:
             if sys.platform == "win32":
                 cuda_home /= "Library"
             os.environ["CUDA_HOME"] = str(cuda_home)
-        os.execl(  # noqa: S606
+        os.execl(  # ruff: ignore[start-process-with-no-shell]
             arg0,
             arg0,
             "-q",
