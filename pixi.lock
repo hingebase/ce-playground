@@ -251,8 +251,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/sysroot_linux-64-2.28-h4ee821c_9.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
       win-64:
-      - conda: https://conda.anaconda.org/conda-forge/noarch/libgcc-devel_win-64-15.2.0-hbb59886_119.conda
-      - conda: https://conda.anaconda.org/conda-forge/noarch/libstdcxx-devel_win-64-15.2.0-h0a72980_119.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/libgcc-devel_win-64-16.1.0-hecf7705_101.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/libstdcxx-devel_win-64-16.1.0-hc76ffd0_101.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/m2-bash-5.2.037.2-hc364b38_6.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/m2-coreutils-8.32.5-hc364b38_6.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/m2-filesystem-2025.02.23.1-hc364b38_10.conda
@@ -271,15 +271,15 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/mingw-w64-ucrt-x86_64-winpthreads-git-12.0.0.r4.gg4f2fc60ca-hd8ed1ab_10.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2026c-h151e31d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/_openmp_mutex-4.5-20_gnu.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/binutils_impl_win-64-2.45-default_ha84baeb_105.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/binutils_win-64-2.45-default_hd1c8def_105.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/gcc_impl_win-64-15.2.0-h062b9a2_19.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/gcc_win-64-15.2.0-ha204fe2_28.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/binutils_impl_win-64-2.46.1-default_ha84baeb_102.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/binutils_win-64-2.46.1-default_hd1c8def_102.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/gcc_impl_win-64-16.1.0-hf72cc1b_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/gcc_win-64-16.1.0-h656620b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gendef-v12.0.0.r1.ggdc42231f0-he1bec0e_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/gojq-0.12.19-h11686cb_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/gxx_impl_win-64-15.2.0-h22fd5bf_19.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/gxx_win-64-15.2.0-h1e3d28f_28.conda
-      - conda: https://conda.anaconda.org/conda-forge/win-64/ld_impl_win-64-2.45-default_hfd38196_105.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/gxx_impl_win-64-16.1.0-he3d2c83_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/gxx_win-64-16.1.0-h1025212_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/ld_impl_win-64-2.46.1-default_hfd38196_102.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/libgcc-16.1.0-h110b43a_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/libgomp-16.1.0-h8ee18e1_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/libstdcxx-16.1.0-hae5796f_1.conda
@@ -8237,16 +8237,15 @@ packages:
   run_exports: {}
   size: 3096495
   timestamp: 1785375361053
-- conda: https://conda.anaconda.org/conda-forge/noarch/libgcc-devel_win-64-15.2.0-hbb59886_119.conda
-  sha256: 5ea9053e6c903e1ebba35e478df14f9f0fd520ad9dadc944ca5697688d621e97
-  md5: 8b4a82e71682c1de2b0839023d6e3133
+- conda: https://conda.anaconda.org/conda-forge/noarch/libgcc-devel_win-64-16.1.0-hecf7705_101.conda
+  sha256: 66a9fbc402c4cf1c50ef05f07bbb69071fc1947af1c1971eef791e48a2653628
+  md5: fa0ffcb4b21516f7380cbb479d0356ad
   depends:
   - m2-conda-epoch
   license: GPL-3.0-only WITH GCC-exception-3.1
-  license_family: GPL
   run_exports: {}
-  size: 2419170
-  timestamp: 1778272969212
+  size: 2417710
+  timestamp: 1785377147118
 - conda: https://conda.anaconda.org/conda-forge/noarch/libstdcxx-devel_linux-64-15.2.0-hd446a21_120.conda
   sha256: 3cabbd98a31d584517c9d8588f5a5b32b49d9898bcce379f41f6138d5af6d6be
   md5: 05a8304d2ab5aa21c7144a114596f669
@@ -8266,16 +8265,15 @@ packages:
   run_exports: {}
   size: 22519609
   timestamp: 1785375386152
-- conda: https://conda.anaconda.org/conda-forge/noarch/libstdcxx-devel_win-64-15.2.0-h0a72980_119.conda
-  sha256: deea115b736d7fe4acbf15c928fc26def84e30211f09a7aac6bed9940862b6e6
-  md5: 928d9a3adb00850a4b5a888683c29465
+- conda: https://conda.anaconda.org/conda-forge/noarch/libstdcxx-devel_win-64-16.1.0-hc76ffd0_101.conda
+  sha256: 6ce82e50948cfa7b9692b171256e122e08d6f9cd32757a2dc154f7870318d787
+  md5: bed4b03dccf2dff522a266d0d4d2095a
   depends:
   - m2-conda-epoch
   license: GPL-3.0-only WITH GCC-exception-3.1
-  license_family: GPL
   run_exports: {}
-  size: 11634599
-  timestamp: 1778272991364
+  size: 13812248
+  timestamp: 1785377167473
 - conda: https://conda.anaconda.org/conda-forge/noarch/m2-bash-5.2.037.2-hc364b38_6.conda
   sha256: b2b243cd336e58d0c241bb9eb799e30713b8a40806b14d242fadd96804ff8cd6
   md5: 804c029d36d971e8de1e56016f8054a5
@@ -11916,28 +11914,28 @@ packages:
   run_exports: {}
   size: 245115
   timestamp: 1781450835602
-- conda: https://conda.anaconda.org/conda-forge/win-64/binutils_impl_win-64-2.45-default_ha84baeb_105.conda
-  sha256: 0caf8210512b7ae6db752264897384cfb8c87ab8584b14ec07df3c0bff0bba51
-  md5: fe34d00e7c9e92559ec8b5a927d06e57
+- conda: https://conda.anaconda.org/conda-forge/win-64/binutils_impl_win-64-2.46.1-default_ha84baeb_102.conda
+  sha256: 83476bc3ed6ee4f1d6e67e6e1360696a0ac3e99679f9c142674003cf721740e3
+  md5: 7832bada38267be3333319febcf5e4fc
   depends:
-  - ld_impl_win-64 2.45 default_hfd38196_105
+  - ld_impl_win-64 2.46.1 default_hfd38196_102
   - m2w64-sysroot_win-64 >=12.0.0.r0
   - zstd >=1.5.7,<1.6.0a0
   license: GPL-3.0-only
   license_family: GPL
   run_exports: {}
-  size: 6096221
-  timestamp: 1766513640880
-- conda: https://conda.anaconda.org/conda-forge/win-64/binutils_win-64-2.45-default_hd1c8def_105.conda
-  sha256: cf68373110471af626b95ae8251784690ff0692a8db964899653e85a2cbe9987
-  md5: 4a665b38e3e856ae26adc523c07371da
+  size: 6140284
+  timestamp: 1784214565466
+- conda: https://conda.anaconda.org/conda-forge/win-64/binutils_win-64-2.46.1-default_hd1c8def_102.conda
+  sha256: 792d62403dc121f62b38909da97502ec961ddf75dc570b1a7e3df064f3e93bbf
+  md5: 6f075a6d0060a1d43f85a94baa163ad2
   depends:
-  - binutils_impl_win-64 2.45 default_ha84baeb_105
+  - binutils_impl_win-64 2.46.1 default_ha84baeb_102
   license: GPL-3.0-only
   license_family: GPL
   run_exports: {}
-  size: 37785
-  timestamp: 1766513678708
+  size: 37449
+  timestamp: 1784214611876
 - conda: https://conda.anaconda.org/conda-forge/win-64/brotli-python-1.2.0-py310hfff998d_1.conda
   sha256: fd250a4f92c2176f23dd4e07de1faf76741dabcc8fa00b182748db4d9578ff7e
   md5: 0caf12fa6690b7f64883b2239853dda0
@@ -12376,37 +12374,36 @@ packages:
   run_exports: {}
   size: 60446
   timestamp: 1781203699644
-- conda: https://conda.anaconda.org/conda-forge/win-64/gcc_impl_win-64-15.2.0-h062b9a2_19.conda
-  sha256: 9a1087fc15253a923d6c4f3a313285b1ad7f5e8c849f24086bc0696b9383313b
-  md5: 04354147d91b3ac936a4f410af5e1d0f
+- conda: https://conda.anaconda.org/conda-forge/win-64/gcc_impl_win-64-16.1.0-hf72cc1b_1.conda
+  sha256: 5407d6e2c1b93e5f7031f217dcc9ebf784b1e8e636d447636b71c3137efde8e0
+  md5: 0a07bbf1449111e000394b3ace131c85
   depends:
-  - binutils_impl_win-64 >=2.45
-  - libgcc >=15.2.0
-  - libgcc-devel_win-64 15.2.0 hbb59886_119
-  - libgomp >=15.2.0
-  - libstdcxx >=15.2.0
-  - libstdcxx-devel_win-64 15.2.0 h0a72980_119
+  - binutils_impl_win-64 >=2.46.1
+  - libgcc >=16.1.0
+  - libgcc-devel_win-64 16.1.0 hecf7705_101
+  - libgomp >=16.1.0
+  - libstdcxx >=16.1.0
+  - libstdcxx-devel_win-64 16.1.0 hc76ffd0_101
   - m2w64-sysroot_win-64
   license: GPL-3.0-only WITH GCC-exception-3.1
-  license_family: GPL
   run_exports: {}
-  size: 62130152
-  timestamp: 1778273122806
-- conda: https://conda.anaconda.org/conda-forge/win-64/gcc_win-64-15.2.0-ha204fe2_28.conda
-  sha256: 4cb6aad26db7824dd38a0eb54a144fbed474b2e1b1e1026986c861f9f09fe53b
-  md5: c24274602ae5bcd2b78935f2e254e1bc
+  size: 64278700
+  timestamp: 1785377287263
+- conda: https://conda.anaconda.org/conda-forge/win-64/gcc_win-64-16.1.0-h656620b_0.conda
+  sha256: 70d32e65f106b6c4422044eca4b8a5a7c3bc68f3712ab034cce5b5baf8424c0d
+  md5: 3d85db268b1ac9ac8c50523287d67641
   depends:
-  - gcc_impl_win-64 15.2.0.*
+  - gcc_impl_win-64 16.1.0.*
   - binutils_win-64
   - m2w64-sysroot_win-64
   - gendef
   license: BSD-3-Clause
   run_exports:
     strong:
-    - libgcc >=15
+    - libgcc >=16
     - ucrt >=10.0.20348.0
-  size: 29807
-  timestamp: 1785174985919
+  size: 30104
+  timestamp: 1785387351716
 - conda: https://conda.anaconda.org/conda-forge/win-64/gendef-v12.0.0.r1.ggdc42231f0-he1bec0e_2.conda
   sha256: ab5e10c99bff6ed9482c7293e2d8231d494756f81bebddfc42109c9d47c64385
   md5: 1ef764cd71f059154bf99cde8200ab19
@@ -12425,35 +12422,34 @@ packages:
   run_exports: {}
   size: 1700346
   timestamp: 1775056835672
-- conda: https://conda.anaconda.org/conda-forge/win-64/gxx_impl_win-64-15.2.0-h22fd5bf_19.conda
-  sha256: 2f3b16794653b12a4aebe9e8073f51dd5f8ff1c82b40585434d1a7f32ff0a558
-  md5: 816b9049907b42a6a4ec655aebe67d3c
+- conda: https://conda.anaconda.org/conda-forge/win-64/gxx_impl_win-64-16.1.0-he3d2c83_1.conda
+  sha256: e3ec81398186b1c87d55f539b8f25b12d80ad9aa09a31533445f80f61f37fb68
+  md5: 57fcbaf58009ddb6628825752a44b3b9
   depends:
-  - gcc_impl_win-64 15.2.0 h062b9a2_19
-  - libstdcxx-devel_win-64 15.2.0 h0a72980_119
+  - gcc_impl_win-64 16.1.0 hf72cc1b_1
+  - libstdcxx-devel_win-64 16.1.0 hc76ffd0_101
   - m2w64-sysroot_win-64
   - tzdata
   license: GPL-3.0-only WITH GCC-exception-3.1
-  license_family: GPL
   run_exports: {}
-  size: 14813951
-  timestamp: 1778273408391
-- conda: https://conda.anaconda.org/conda-forge/win-64/gxx_win-64-15.2.0-h1e3d28f_28.conda
-  sha256: 3e44f1f19708e214a050a5b3ab8a5bd3b51f5767ddec9607712e86c9f1603086
-  md5: 55b22130dd62df20198e28e63d753a61
+  size: 15821165
+  timestamp: 1785377490508
+- conda: https://conda.anaconda.org/conda-forge/win-64/gxx_win-64-16.1.0-h1025212_0.conda
+  sha256: cffd6189aea53ed3e8a1c4a0d691811267d87c909b68cce2787b4b2d5aab0ea9
+  md5: 885faf6cd71e7fe401bced110e46829b
   depends:
-  - gxx_impl_win-64 15.2.0.*
-  - gcc_win-64 ==15.2.0 ha204fe2_28
+  - gxx_impl_win-64 16.1.0.*
+  - gcc_win-64 ==16.1.0 h656620b_0
   - binutils_win-64
   - m2w64-sysroot_win-64
   license: BSD-3-Clause
   run_exports:
     strong:
-    - libstdcxx >=15
-    - libgcc >=15
+    - libstdcxx >=16
+    - libgcc >=16
     - ucrt >=10.0.20348.0
-  size: 28261
-  timestamp: 1785174985919
+  size: 28503
+  timestamp: 1785387351716
 - conda: https://conda.anaconda.org/conda-forge/win-64/icu-78.3-h5112557_2.conda
   sha256: 75c549b55b673e15de8785a8e5dd85bca7eb612eee0ff4dc8d7bdaa15eacbdbb
   md5: e596942e8ee6ee17fdcf1e6a77757a66
@@ -12604,18 +12600,18 @@ packages:
     - krb5 >=1.22.2,<1.23.0a0
   size: 750320
   timestamp: 1781859644591
-- conda: https://conda.anaconda.org/conda-forge/win-64/ld_impl_win-64-2.45-default_hfd38196_105.conda
-  sha256: fd7827e813bdb1f255cedf1e9d003c8be431c52f455a74d1455527e688a6b34b
-  md5: cd7c6627fc038d00421f9d2970587fa9
+- conda: https://conda.anaconda.org/conda-forge/win-64/ld_impl_win-64-2.46.1-default_hfd38196_102.conda
+  sha256: e3cb27be096acab3c8d5ed36961e291e3e6e9c2323dd3fd565623a4c093e931c
+  md5: 179ed4e90a5c9560bebb28292a726f12
   depends:
   - zstd >=1.5.7,<1.6.0a0
   constrains:
-  - binutils_impl_win-64 2.45
+  - binutils_impl_win-64 2.46.1
   license: GPL-3.0-only
   license_family: GPL
   run_exports: {}
-  size: 876611
-  timestamp: 1766513627408
+  size: 896485
+  timestamp: 1784214548635
 - conda: https://conda.anaconda.org/conda-forge/win-64/libarchive-3.6.2-h27c7867_0.conda
   sha256: 71b18481119520a4ab1e07ee44216a5f9c04ceebdd6393e783fbed4f1f84b51c
   md5: 6e1fc6cfaa26186dd5abd5df8d732193
