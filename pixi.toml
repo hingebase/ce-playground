@@ -110,8 +110,13 @@ llvm-tools = ">=19.1.0"
 clangxx_osx-64 = ">=19.1.0"
 
 [feature.clang.target.win-64.dependencies]
-clangxx_win-64 = ">=19.1.0"
-vs_win-64 = ">=2022.14.0"
+clangxx = ">=19.1.0"
+llvm-tools = "*"
+vs_win-64 = ">=2026.1.0"
+
+[feature.clang.target.win-64.activation.env]
+CC = "clang"
+CXX = "clang++"
 
 [feature.gcc]
 platforms = ["linux-64", "win-64"]
@@ -127,7 +132,7 @@ m2-which = "*"
 
 [feature.gcc.target.win-64.tasks._inspect2]
 cmd = "bash -elc scripts/inspect.sh"
-env = { CHERE_INVOKING = "1" }
+env = { CHERE_INVOKING = "1", MSYS2_PATH_TYPE = "inherit" }
 
 [feature.intel]
 platforms = ["linux-64", "win-64"]
