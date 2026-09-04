@@ -13,6 +13,7 @@ name = "_env"
 crate-type = ["cdylib"]
 
 [dependencies]
+anyhow = "1.0.104"
 pyo3 = "0.29.2"
 rattler_conda_types = { version = "0.48.1", default-features = false }
 rattler_shell = { version = "=0.27.10", default-features = false }

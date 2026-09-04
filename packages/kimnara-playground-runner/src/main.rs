@@ -10,31 +10,33 @@ const LIBRARY_BIN: &str = "Library/bin";
 const LIBRARY_BIN: &str = "bin";
 
 #[tokio::main(flavor = "current_thread")]
-async fn main() -> ExitCode {
-    let Ok(mut prefix) = std::env::current_exe() else {
-        return ExitCode::FAILURE;
-    };
+async fn main() -> anyhow::Result<ExitCode> {
+    let mut prefix = std::env::current_exe()?;
     if !(prefix.pop() && prefix.ends_with(LIBRARY_BIN)) {
-        return ExitCode::FAILURE;
+        return Ok(ExitCode::FAILURE);
     }
     prefix.pop();  // bin
 
-    let cuda_home = if cfg!(target_os = "windows") {
-        prefix.pop();  // Library
-        let mut cuda_home = prefix.with_file_name("cuda");
-        cuda_home.push("Library");
-        cuda_home
-    } else {
-        prefix.with_file_name("cuda")
-    };
-
     // https://github.com/compiler-explorer/compiler-explorer/issues/5481
-    let env_vars = if cuda_home.is_dir() {
-        cuda_home.into_string().map_or_default(
-            |value| HashMap::from([("CUDA_HOME".into(), value)]),
-        )
-    } else {
+    let env_vars = if cfg!(target_os = "macos") {
         HashMap::new()
+    } else {
+        let cuda_home = if cfg!(target_os = "windows") {
+            prefix.pop();  // Library
+            let mut cuda_home = prefix.with_file_name("cuda");
+            cuda_home.push("Library");
+            cuda_home
+        } else {
+            prefix.with_file_name("cuda")
+        };
+
+        if cuda_home.is_dir() {
+            cuda_home.into_string().map_or_default(
+                |value| HashMap::from([("CUDA_HOME".into(), value)]),
+            )
+        } else {
+            HashMap::new()
+        }
     };
 
     let mut command: Vec<_> = std::env::args().collect();
@@ -42,9 +44,7 @@ async fn main() -> ExitCode {
 
     let shell = Default::default();
     run_command_in_environment(&prefix, &command, shell, &env_vars, None)
-        .await
-        .ok()
-        .and_then(|status| status.code())
-        .and_then(|code| u8::try_from(code).ok())
-        .map_or(ExitCode::FAILURE, |code| code.into())
+        .await?
+        .code()
+        .map_or(Ok(ExitCode::FAILURE), |code| Ok(u8::try_from(code)?.into()))
 }

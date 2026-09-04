@@ -25,6 +25,8 @@ requirements:
     - ${{ stdlib("c") }}
     - if: microarch_level | int
       then: x86_64-microarch-level ==${{ microarch_level }}
+  run:
+    - python
   ignore_run_exports:
     by_name:
       - __osx

@@ -31,6 +31,8 @@ requirements:
     - python 3.14.*
     - python-gil
     - uv >=0.10.2
+  run:
+    - py-rattler >=0.22.0
   ignore_run_exports:
     by_name:
       - __osx
