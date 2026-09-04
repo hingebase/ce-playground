@@ -1,11 +1,13 @@
 use std::collections::HashMap;
 use std::io::ErrorKind;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use anyhow::Error;
 use pyo3::{PyResult, pymodule};
+use pyo3::exceptions::PyKeyError;
 use rattler_conda_types::Platform;
+use rattler_lock::LockFile;
 use rattler_shell::activation::{ActivationVariables, Activator};
 use rattler_shell::shell::{Bash, ShellEnum};
 use serde::Deserialize;
@@ -28,6 +30,7 @@ mod subprocess {
 
 mod rattler {
     pyo3::import_exception!(rattler.exceptions, ActivationError);
+    pyo3::import_exception!(rattler.exceptions, ParseCondaLockError);
 }
 
 #[pyo3::pyfunction]
@@ -73,8 +76,37 @@ fn inspect() -> PyResult<HashMap<String, HashMap<String, String>>> {
         .collect()
 }
 
+#[pyo3::pyfunction]
+fn numba_versions() -> PyResult<HashMap<String, String>> {
+    LockFile::from_path(Path::new("pixi.lock"))
+        .map_err(|err| rattler::ParseCondaLockError::new_err(
+            format!("{:#}", Error::new(err)),
+        ))?
+        .environments()
+        .filter_map(|(name, env)| if name.starts_with("nb") {
+            let (_, packages) = env.packages_by_platform().find(
+                |(platform, _)| platform.subdir() == Platform::current(),
+            )?;
+            if let Some(data) = packages
+                .filter_map(|package| package.as_binary_conda())
+                .find(|data| data.package_record.name.as_source() == "numba")
+            {
+                let version = data.package_record.version.to_string();
+                Some(Ok((name.into(), version)))
+            } else {
+                Some(Err(PyKeyError::new_err("numba")))
+            }
+        } else {
+            None
+        })
+        .collect()
+}
+
 #[pymodule]
 mod _env {
     #[pymodule_export]
     use super::inspect;
+
+    #[pymodule_export]
+    use super::numba_versions;
 }
