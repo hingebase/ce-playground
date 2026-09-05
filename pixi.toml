@@ -175,8 +175,6 @@ vs_win-64 = ">=2026.1.0"
 conda-build = "*"
 kimnara-playground-runner = { path = "packages/kimnara-playground-runner" }
 libblas = { build = "*_mkl" }
-psutil = "*"
-scipy = "*"
 
 [feature.nb057]
 channels = ["conda-forge", "numba"]
