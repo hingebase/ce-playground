@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use std::process::ExitCode;
 
 use rattler_shell::run_command_in_environment;
@@ -16,33 +15,32 @@ async fn main() -> anyhow::Result<ExitCode> {
         return Ok(ExitCode::FAILURE);
     }
     prefix.pop();  // bin
+    if cfg!(target_os = "windows") {
+        prefix.pop();  // Library
+    }
 
-    // https://github.com/compiler-explorer/compiler-explorer/issues/5481
-    let env_vars = if cfg!(target_os = "macos") {
-        HashMap::new()
+    let mut base = prefix.with_file_name("conda");
+    if cfg!(target_os = "windows") {
+        // condabin doesn't work
+        base.push("Scripts");
     } else {
-        let cuda_home = if cfg!(target_os = "windows") {
-            prefix.pop();  // Library
-            let mut cuda_home = prefix.with_file_name("cuda");
-            cuda_home.push("Library");
-            cuda_home
-        } else {
-            prefix.with_file_name("cuda")
-        };
-
-        if cuda_home.is_dir() {
-            cuda_home.into_string().map_or_default(
-                |value| HashMap::from([("CUDA_HOME".into(), value)]),
-            )
-        } else {
-            HashMap::new()
-        }
-    };
+        // Prefer condabin which is minimal
+        base.push("condabin");
+    }
+    if let Some(path) = std::env::var_os("PATH") {
+        let mut paths: Vec<_> = std::env::split_paths(&path).collect();
+        paths.insert(0, base);
+        let new_path = std::env::join_paths(paths)?;
+        unsafe { std::env::set_var("PATH", &new_path); }
+    } else {
+        unsafe { std::env::set_var("PATH", &base); }
+    }
 
     let mut command: Vec<_> = std::env::args().collect();
     command[0] = "python".into();
 
     let shell = Default::default();
+    let env_vars = Default::default();
     run_command_in_environment(&prefix, &command, shell, &env_vars, None)
         .await?
         .code()
