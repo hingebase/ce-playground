@@ -17,6 +17,6 @@ jobs:
       - uses: FantasticFiasco/action-update-license-year@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: '*/*.py'
+          path: packages/kimnara-playground-builder/src/kimnara_playground_builder/*.py
           commitTitle: 📄 Update license year
           prTitle: Happy New Year

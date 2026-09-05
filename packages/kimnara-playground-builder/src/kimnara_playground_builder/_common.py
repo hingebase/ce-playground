@@ -12,22 +12,22 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-__all__ = ["Compiler", "Context", "env", "pixi", "which"]
+__all__ = ["Compiler", "Context", "env", "which"]
 
-import asyncio
 import os
 import shutil
-import sys
 from typing import TYPE_CHECKING, Literal, Required, TypedDict
 
 from minijinja import Environment, load_from_path
+
+from . import __path__
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
 
 type _Boolean = Literal["true", "false"]
 
-env: Environment = Environment(load_from_path("templates"))
+env: Environment = Environment(load_from_path(__path__))
 
 
 class Compiler(TypedDict, total=False):
@@ -65,18 +65,6 @@ class Context(TypedDict, total=False):
     objdumper: str
     llvmDisassembler: str
     compiler: Required[dict[str, Compiler]]
-
-
-async def pixi(*args: str) -> bytes:
-    proc = await asyncio.create_subprocess_exec(
-        "pixi", "-q", *args,
-        stdin=asyncio.subprocess.DEVNULL,
-        stdout=asyncio.subprocess.PIPE,
-    )
-    out, _ = await proc.communicate()
-    if proc.returncode != 0:
-        sys.exit(proc.returncode or 1)
-    return out
 
 
 def which(cmd: str, env: Mapping[str, str]) -> str:

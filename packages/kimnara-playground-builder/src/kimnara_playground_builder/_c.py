@@ -34,7 +34,9 @@ def local_properties(envs: Mapping[str, Mapping[str, str]]) -> _common.Context:
         "demangler": _common.which("llvm-cxxfilt", envs["clang"]),
         "llvmDisassembler": _common.which("llvm-dis", envs["clang"]),
         "compiler": {
-            "c" + k: _compilers[k](v).compiler() for k, v in envs.items()
+            "c" + k: cls(v).compiler()
+            for k, v in envs.items()
+            if (cls := _compilers.get(k))
         },
     }
     match sys.platform:

@@ -13,9 +13,14 @@ use rattler_shell::shell::{Bash, ShellEnum};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
+struct PlatformInfo {
+    subdir: Platform,
+}
+
+#[derive(Deserialize)]
 struct EnvironmentInfo {
     name: String,
-    platforms: Vec<Platform>,
+    platforms: Vec<PlatformInfo>,
     prefix: PathBuf,
 }
 
@@ -32,6 +37,8 @@ mod rattler {
     pyo3::import_exception!(rattler.exceptions, ActivationError);
     pyo3::import_exception!(rattler.exceptions, ParseCondaLockError);
 }
+
+const EXCLUDE: &[&str] = &["default", "node", "cuda"];
 
 #[pyo3::pyfunction]
 fn inspect() -> PyResult<HashMap<String, HashMap<String, String>>> {
@@ -56,7 +63,11 @@ fn inspect() -> PyResult<HashMap<String, HashMap<String, String>>> {
     let variables = ActivationVariables::from_env().unwrap_or_default();
     info.environments_info
         .into_iter()
-        .filter(|env| env.platforms.contains(&Platform::current()))
+        .filter(
+            |env| env.platforms.iter().find(
+                |platform| platform.subdir == Platform::current(),
+            ).is_some() && !EXCLUDE.contains(&env.name.as_str()),
+        )
         .map(|env| {
             let shell_type = if cfg!(not(target_os = "windows")) {
                 ShellEnum::default()

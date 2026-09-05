@@ -6,7 +6,15 @@ build-backend = "maturin"
 name = "kimnara-playground-builder"
 version = "0.0.2"
 requires-python = ">=3.14"
-dependencies = ["py-rattler >=0.22.0"]
+dependencies = [
+    "minijinja >=2.15.1",
+
+    # https://github.com/compiler-explorer/compiler-explorer/blob/main/.minimum-node-version
+    "nodejs-wheel >=22.12.0",
+
+    "packaging >=26.0.0",
+    "py-rattler >=0.22.0",
+]
 dynamic = ["license", "urls"]
 
 [[project.authors]]
