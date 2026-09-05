@@ -72,16 +72,9 @@ platforms = ["linux-64", "osx-64-macos-10-15", "win-64"]
 platforms = ["linux-64-cuda-13", "win-64-cuda-13"]
 
 [feature.cuda.dependencies]
-cuda-cudart = "*"
+cuda-cudart-dev = ">=13.0.48"
 cuda-nvrtc = "*"
 cuda-nvvm-tools = "*"
-
-[feature.cuda.target.linux-64.dependencies]
-cuda-cudart-dev_linux-64 = "*"
-
-[feature.cuda.target.win-64.dependencies]
-# Only Library/lib/x64/cudadevrt.lib can be found by numba
-cuda-cudart-dev_win-64 = ">=13.0.48"
 
 [feature.builder]
 channels = ["conda-forge", "https://prefix.dev/github-releases"]
