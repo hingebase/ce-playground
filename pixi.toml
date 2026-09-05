@@ -42,11 +42,11 @@ clang = ["clang"]
 gcc = ["gcc"]
 intel = ["intel"]
 msvc = ["msvc"]
-nb057 = ["kimnara-py311", "numba", "nb057", "pyomp-legacy"]
-nb058 = ["kimnara-py311", "numba", "nb058", "pyomp-legacy"]
-nb059 = ["kimnara", "numba", "nb059", "pyomp-legacy"]
-nb060 = ["kimnara", "numba", "nb060", "pyomp-legacy"]
-nb061 = ["kimnara", "numba", "nb061", "pyomp"]
+nb057 = ["kimnara-py311", "numba", "nb057", "pyomp", "optional-svml"]
+nb058 = ["kimnara-py311", "numba", "nb058", "pyomp", "svml"]
+nb059 = ["kimnara", "numba", "nb059", "pyomp", "svml"]
+nb060 = ["kimnara", "numba", "nb060", "pyomp", "svml"]
+nb061 = ["kimnara", "numba", "nb061", "pyomp", "optional-svml"]
 nb062 = ["kimnara", "numba", "nb062", "pyomp"]
 nb063 = ["kimnara", "numba", "nb063", "pyomp"]
 nb064 = ["kimnara", "numba", "nb064"]
@@ -175,74 +175,47 @@ vs_win-64 = ">=2026.1.0"
 
 ## Numba
 
+[feature]
+nb057.constraints.numba = "==0.57.1"
+nb058.dependencies.numba = "==0.58.1"
+nb059.dependencies.numba = "==0.59.1"
+nb060.dependencies.numba = "==0.60.0"
+nb061.constraints.numba = "==0.61.2"
+nb062.dependencies.numba = "==0.62.1"
+nb063 = { dependencies.numba = "==0.63.1", platforms = ["linux-64", "win-64"] }
+nb064 = { dependencies.numba = "==0.64.0", platforms = ["linux-64", "win-64"] }
+nb065 = { dependencies.numba = "==0.65.1", platforms = ["linux-64", "win-64"] }
+nb066 = { dependencies.numba = "==0.66.0", platforms = ["linux-64", "win-64"] }
+nb067 = { dependencies.numba = "0.67.*", platforms = ["linux-64", "win-64"] }
+
 [feature.numba.dependencies]
 kimnara-playground-runner = { path = "packages/kimnara-playground-runner" }
 libblas = { build = "*_mkl" }
 psutil = "*"
 
-[feature.nb057]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.57.1", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.57.1", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.57.1", channel = "numba" }
-
-[feature.nb058]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.58.1", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.58.1", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.58.1", channel = "numba" }
-
-[feature.nb059]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.59.1", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.59.1", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.59.1", channel = "numba" }
-
-[feature.nb060]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.60.0", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
-
-[feature.nb061]
-dependencies.numba = "==0.61.2"
-
-[feature.nb062]
-dependencies.numba = "==0.62.1"
-
-[feature.nb063]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.63.1"
-
-[feature.nb064]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.64.0"
-
-[feature.nb065]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.65.1"
-
-[feature.nb066]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.66.0"
-
-[feature.nb067]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "0.67.*"
-
 [feature.pyomp]
 channels = ["Python-for-HPC"]
-target.linux-64.dependencies.pyomp = { version = ">=0.4.0", channel = "Python-for-HPC" }
-
-[feature.pyomp-legacy]
-channels = ["conda-forge", "numba", "Python-for-HPC", "https://software.repos.intel.com/python/conda"]
 target.linux-64.dependencies.pyomp = { version = ">=0.3.2", channel = "Python-for-HPC" }
 
-[feature.pyomp-legacy.target.osx-64.dependencies]
+[feature.svml]
+channels = ["conda-forge", "numba"]
+target.linux-64.dependencies.intel-cmplr-lib-rt.channel = "conda-forge"
+target.osx-64.dependencies.icc_rt.channel = "numba"
+target.win-64.dependencies.intel-cmplr-lib-rt.channel = "conda-forge"
+
+[feature.optional-svml]
+channels = ["conda-forge", "numba", "https://software.repos.intel.com/python/conda"]
+
+[feature.optional-svml.target.linux-64.dependencies]
+numba = { channel = "conda-forge" }
+
+[feature.optional-svml.target.osx-64.dependencies]
 icc_rt = { channel = "numba" }
 llvmlite = { channel = "numba" }
+numba = { channel = "numba" }
 
-[feature.pyomp-legacy.target.win-64.dependencies]
+[feature.optional-svml.target.win-64.dependencies]
 intel-cmplr-lib-rt = { channel = "conda-forge" }
 llvmlite = { channel = "numba" }
+numba = { channel = "numba" }
 tbb = { channel = "https://software.repos.intel.com/python/conda" }
