@@ -20,16 +20,22 @@ microarch_level = ["1"]
 [workspace.target.linux-64.build-variants]
 c_compiler = ["gcc"]
 c_compiler_version = ["16.2"]
+cxx_compiler = ["gxx"]
+cxx_compiler_version = ["16.2"]
 
 [workspace.target.osx-64.build-variants]
 c_compiler = ["clang"]
 c_compiler_version = ["21.1"]
+cxx_compiler = ["clangxx"]
+cxx_compiler_version = ["21.1"]
 
 [workspace.target.win-64.build-variants]
 c_compiler = ["vs"]
 c_compiler_version = ["2026.1"]
 c_stdlib = ["vs"]
 c_stdlib_version = ["2026.1"]
+cxx_compiler = ["vs"]
+cxx_compiler_version = ["2026.1"]
 
 [environments]
 default = ["dummy", "builder"]
@@ -38,21 +44,26 @@ clang = ["dummy", "clang"]
 gcc = ["gcc"]
 intel = ["intel"]
 msvc = ["msvc"]
-nb057 = ["dummy", "numba", "nb057", "pyomp-legacy"]
-nb058 = ["dummy", "numba", "nb058", "pyomp-legacy"]
-nb059 = ["dummy", "numba", "nb059", "pyomp-legacy"]
-nb060 = ["dummy", "numba", "nb060", "pyomp-legacy"]
-nb061 = ["dummy", "numba", "nb061", "conda", "pyomp"]
-nb062 = ["dummy", "numba", "nb062", "conda", "pyomp"]
-nb063 = ["numba", "nb063", "conda", "pyomp"]
-nb064 = ["numba", "nb064", "conda"]
-nb065 = ["numba", "nb065", "conda"]
-nb066 = ["numba", "nb066", "conda"]
-nb067 = ["numba", "nb067", "conda"]
+nb057 = ["kimnara-py311", "dummy", "numba", "nb057"]
+nb058 = ["kimnara-py311", "dummy", "numba", "nb058"]
+nb059 = ["kimnara-py311", "dummy", "numba", "nb059"]
+nb060 = ["kimnara-py311", "dummy", "numba", "nb060"]
+nb061 = ["kimnara", "dummy", "numba", "nb061", "pyomp"]
+nb062 = ["kimnara", "dummy", "numba", "nb062", "pyomp"]
+nb063 = ["kimnara", "numba", "nb063", "pyomp"]
+nb064 = ["kimnara", "numba", "nb064"]
+nb065 = ["kimnara", "numba", "nb065"]
+nb066 = ["kimnara", "numba", "nb066"]
+nb067 = ["kimnara", "numba", "nb067"]
 cuda = ["cuda"]
 
-[feature.conda.dependencies]
+[feature.kimnara.dependencies]
 conda = ">=25.9.0"
+
+[feature.kimnara.dependencies.kimnara]
+git = "https://github.com/hingebase/kimnara"
+branch = "main"
+subdirectory = "packages/kimnara"
 
 [feature.dummy]
 platforms = ["linux-64", "osx-64-macos-10-15", "win-64"]
@@ -225,20 +236,29 @@ dependencies.numba = "0.67.*"
 channels = ["Python-for-HPC"]
 target.linux-64.dependencies.pyomp = { version = ">=0.4.0", channel = "Python-for-HPC" }
 
-[feature.pyomp-legacy]
-channels = ["conda-forge", "numba", "Python-for-HPC"]
+[feature.kimnara-py311]
+channels = ["conda-forge", "numba", "Python-for-HPC", "https://software.repos.intel.com/python/conda"]
 
-[feature.pyomp-legacy.target.linux-64.dependencies]
+[feature.kimnara-py311.dependencies.kimnara]
+git = "https://github.com/hingebase/kimnara"
+branch = "main"
+subdirectory = "packages/kimnara-py311"
+
+[feature.kimnara-py311.target.linux-64.dependencies]
 conda = { version = ">=25.9.0", channel = "conda-forge" }
 llvmlite = { channel = "conda-forge" }
 pyomp = { version = ">=0.3.2", channel = "Python-for-HPC" }
 
-[feature.pyomp-legacy.target.osx-64.dependencies]
+[feature.kimnara-py311.target.osx-64.dependencies]
 conda = { version = "<24.9.0", channel = "conda-forge" }
 icc_rt = { channel = "numba" }
 llvmlite = { channel = "numba" }
 
-[feature.pyomp-legacy.target.win-64.dependencies]
+[feature.kimnara-py311.target.unix.dependencies]
+tbb = { channel = "conda-forge" }
+
+[feature.kimnara-py311.target.win-64.dependencies]
 conda = { version = "<24.9.0", channel = "conda-forge" }
 intel-cmplr-lib-rt = { channel = "conda-forge" }
 llvmlite = { channel = "numba" }
+tbb = { channel = "https://software.repos.intel.com/python/conda" }
