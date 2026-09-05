@@ -195,4 +195,4 @@ _compilers: dict[str, type[GNU]] = {
     "intel": IntelLLVM,
     "msvc": MSVC,
 }
-_version = re.compile(r"\d+\.\d+\.\d+")
+_version = re.compile(r"\b\d+\.\d+\.\d+")
