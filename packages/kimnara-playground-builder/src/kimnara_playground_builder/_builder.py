@@ -45,7 +45,7 @@ def _custom_compile_timeout() -> None:
     pathlib.Path(
         "compiler-explorer/etc/config/compiler-explorer.local.properties",
     ).write_text(
-        "compileTimeoutMs=60000\n",
+        "compileTimeoutMs=80000\n",
         encoding="ascii",
         newline="",
     )
