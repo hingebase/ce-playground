@@ -64,28 +64,18 @@ git = "https://github.com/hingebase/kimnara"
 branch = "main"
 subdirectory = "packages/kimnara"
 
-[feature.kimnara.target.linux-64.dependencies]
-cuda-cudart-dev = "*"
-cuda-nvrtc = "*"
-cuda-nvvm = "*"
-
-[feature.kimnara.target.win-64.dependencies]
-cuda-cudart-dev = "12.*"
-cuda-nvrtc = "12.*"
-cuda-nvvm = "12.*"
+[feature.kimnara.target]
+linux-64.dependencies.cuda-bindings = "12.*"
+win-64.dependencies.cuda-bindings = "12.*"
 
 [feature.kimnara-py311.dependencies.kimnara]
 git = "https://github.com/hingebase/kimnara"
 branch = "main"
 subdirectory = "packages/kimnara-py311"
 
-[feature.kimnara-py311.target.linux-64.dependencies]
-cuda-cudart-dev = "*"
-cuda-nvrtc = "*"
-cuda-nvvm = "*"
-
-[feature.kimnara-py311.target.win-64.dependencies]
-cudatoolkit = "*"
+[feature.kimnara-py311.target]
+linux-64.dependencies.cuda-bindings = "12.*"
+win-64.dependencies.cuda-bindings = "11.*"
 
 [feature.builder]
 channels = ["conda-forge", "https://prefix.dev/github-releases"]
