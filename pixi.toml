@@ -94,15 +94,15 @@ channels = ["conda-forge", "https://prefix.dev/github-releases"]
 kimnara-playground-builder = { path = "packages/kimnara-playground-builder" }
 
 [feature.builder.target]
-linux-64.dependencies.pixi = ">=0.71.0"
-osx-64.dependencies.pixi = { version = ">=0.71.0,<0.74.0", channel = "https://prefix.dev/github-releases" }
+linux-64.dependencies.pixi = ">=0.76.0"
+osx-64.dependencies.pixi = { version = "0.71.*", channel = "https://prefix.dev/github-releases" }
 
 [feature.builder.target.win-64.dependencies]
 m2-coreutils = "*"
 m2-findutils = "*"
 m2-sed = "*"
 m2-which = "*"
-pixi = ">=0.71.0"
+pixi = ">=0.76.0"
 
 [feature.builder.tasks._prepare]
 cmd = 'pixi i -a --locked && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'

@@ -619,7 +619,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-64/readline-8.3-h68b038d_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/tk-8.6.13-h7142dee_3.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-64/zstd-1.5.7-h3eecb57_6.conda
-      - conda: https://prefix.dev/github-releases/osx-64/pixi-0.73.0-h0dc7051_0.conda
+      - conda: https://prefix.dev/github-releases/osx-64/pixi-0.71.3-h0dc7051_0.conda
       - conda_source: kimnara-playground-builder[ab4a9406] @ packages/kimnara-playground-builder
       win-64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/_python_abi3_support-1.0-hd8ed1ab_3.conda
@@ -20645,13 +20645,13 @@ packages:
   license: BSD
   size: 6002364
   timestamp: 1744136523561
-- conda: https://prefix.dev/github-releases/osx-64/pixi-0.73.0-h0dc7051_0.conda
-  sha256: 7513c89bc95da43fc36e49d6e7e07ec02ad365ef24d70ee5c4ee5fbc090abbf5
-  md5: 92cdc61e1316f4446b3a46e4c7343f87
+- conda: https://prefix.dev/github-releases/osx-64/pixi-0.71.3-h0dc7051_0.conda
+  sha256: ca6f764f6daee838f4a07c2778c484f14011a759153cb7bfb6cd3adaa4bf4484
+  md5: 615fba8e516cc66722dd4f657aae23a4
   license: BSD-3-Clause
   run_exports: {}
-  size: 25818834
-  timestamp: 1784236288620
+  size: 25595259
+  timestamp: 1782909833002
 - conda: https://software.repos.intel.com/python/conda/win-64/tbb-2023.1.0-vc14_intel_152.conda
   sha256: f6a89474082057bf80245d19dd265fd7f00db75b45463ee5ccbd703c96fe7235
   md5: 849bb72a7ea23fc07dacfb0f2f7432a1
