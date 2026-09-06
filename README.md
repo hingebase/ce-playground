@@ -48,6 +48,6 @@ and C/C++ compilers.
 [2]: https://developer.apple.com/library/archive/technotes/tn2339/_index.html
 [3]: https://visualstudio.microsoft.com/visual-cpp-build-tools/
 [4]: https://github.com/compiler-explorer/compiler-explorer/actions/workflows/test-and-deploy.yml
-[5]: https://pixi.sh/latest/installation/
+[5]: https://pixi.prefix.dev/latest/installation/
 [6]: https://github.com/hingebase/kimnara
 [7]: pixi.lock#L2-L18
