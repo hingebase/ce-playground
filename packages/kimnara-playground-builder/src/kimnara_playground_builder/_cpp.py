@@ -29,7 +29,9 @@ def local_properties(
     envs: Mapping[str, Mapping[str, str]],
 ) -> None:
     context["compiler"] = {
-        k: _compilers[k](v).compiler() for k, v in envs.items()
+        k: cls(v).compiler()
+        for k, v in envs.items()
+        if (cls := _compilers.get(k))
     }
     Path("compiler-explorer/etc/config/c++.local.properties").write_text(
         _common.env.render_template("c.local.properties.jinja", **context),

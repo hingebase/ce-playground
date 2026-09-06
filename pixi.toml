@@ -1,83 +1,121 @@
-[workspace]
-channels = ["conda-forge"]
-platforms = ["linux-64", "osx-64", "win-64"]
-requires-pixi = ">=0.68.0,<0.71.0"
+# This should match the minimum supported Pixi version
+#:schema https://pixi.prefix.dev/v0.71.0/schema/manifest/schema.json
 
-[system-requirements]
-macos = "10.15"
+[workspace]
+name = "kimnara-playground"
+channels = ["conda-forge"]
+platforms = [
+    "linux-64",
+    { platform = "osx-64", macos = "10.15" },
+    "win-64",
+]
+preview = ["pixi-build"]
+requires-pixi = ">=0.71.0"
+
+[workspace.build-variants]
+microarch_level = ["1"]
+
+[workspace.target.linux-64.build-variants]
+c_compiler = ["gcc"]
+c_compiler_version = ["16.2"]
+cxx_compiler = ["gxx"]
+cxx_compiler_version = ["16.2"]
+
+[workspace.target.osx-64.build-variants]
+c_compiler = ["clang"]
+c_compiler_version = ["21.1"]
+cxx_compiler = ["clangxx"]
+cxx_compiler_version = ["21.1"]
+
+[workspace.target.win-64.build-variants]
+c_compiler = ["vs"]
+c_compiler_version = ["2026.1"]
+c_stdlib = ["vs"]
+c_stdlib_version = ["2026.1"]
+cxx_compiler = ["vs"]
+cxx_compiler_version = ["2026.1"]
 
 [environments]
-default = ["jinja", "pixi"]
-prepare = ["prepare", "pixi", "coreutils"]
-start = ["node"]
-clang = ["clang", "jq"]
-gcc = ["gcc", "jq", "coreutils"]
-intel = ["intel", "jq"]
-msvc = ["msvc", "jq"]
-nb057 = ["numba", "nb057", "pixi", "pyomp-legacy"]
-nb058 = ["numba", "nb058", "pixi", "pyomp-legacy"]
-nb059 = ["numba", "nb059", "pixi", "pyomp-legacy"]
-nb060 = ["numba", "nb060", "pixi", "pyomp-legacy"]
-nb061 = ["numba", "nb061", "pixi", "conda", "pyomp"]
-nb062 = ["numba", "nb062", "pixi", "conda", "pyomp"]
-nb063 = ["numba", "nb063", "pixi", "conda", "pyomp"]
-nb064 = ["numba", "nb064", "pixi", "conda"]
-nb065 = ["numba", "nb065", "pixi", "conda"]
-nb066 = ["numba", "nb066", "pixi", "conda"]
-cuda = ["cuda"]
+default = ["builder"]
+node = ["node"]
+clang = ["clang"]
+gcc = ["gcc"]
+intel = ["intel"]
+msvc = ["msvc"]
+nb057 = ["kimnara-py311", "numba", "nb057", "pyomp"]
+nb058 = ["kimnara-py311", "numba", "nb058", "pyomp", "svml"]
+nb059 = ["kimnara", "numba", "nb059", "pyomp", "svml"]
+nb060 = ["kimnara", "numba", "nb060", "pyomp", "svml"]
+nb061 = ["kimnara", "numba", "nb061", "pyomp"]
+nb062 = ["kimnara", "numba", "nb062", "pyomp"]
+nb063 = ["kimnara", "numba", "nb063", "pyomp"]
+nb064 = ["kimnara", "numba", "nb064"]
+nb065 = ["kimnara", "numba", "nb065"]
+nb066 = ["kimnara", "numba", "nb066"]
+nb067 = ["kimnara", "numba", "nb067"]
+conda = ["conda"]
 
 [feature.conda.dependencies]
 conda = ">=25.9.0"
+conda-build = "*"
 
-[feature.coreutils.target.win-64.dependencies]
+[feature.kimnara.dependencies.kimnara]
+git = "https://github.com/hingebase/kimnara"
+branch = "main"
+subdirectory = "packages/kimnara"
+
+[feature.kimnara.target]
+linux-64.dependencies.cuda-bindings = "12.*"
+win-64.dependencies.cuda-bindings = "12.*"
+
+[feature.kimnara-py311.dependencies.kimnara]
+git = "https://github.com/hingebase/kimnara"
+branch = "main"
+subdirectory = "packages/kimnara-py311"
+
+[feature.kimnara-py311.target]
+linux-64.dependencies.cuda-bindings = "12.*"
+win-64.dependencies.cuda-bindings = "11.*"
+
+[feature.builder]
+channels = ["conda-forge", "https://prefix.dev/github-releases"]
+
+[feature.builder.dependencies]
+kimnara-playground-builder = { path = "packages/kimnara-playground-builder" }
+
+[feature.builder.target]
+linux-64.dependencies.pixi = ">=0.76.0"
+osx-64.dependencies.pixi = { version = "0.71.*", channel = "https://prefix.dev/github-releases" }
+
+[feature.builder.target.win-64.dependencies]
 m2-coreutils = "*"
+m2-findutils = "*"
+m2-sed = "*"
+m2-which = "*"
+pixi = ">=0.76.0"
 
-[feature.cuda]
-platforms = ["linux-64", "win-64"]
+[feature.builder.tasks._prepare]
+cmd = 'pixi i -a --locked && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'
 
-[feature.cuda.system-requirements]
-cuda = "13"
+[feature.builder.tasks._prepare.env]
+GITHUB_ACTIONS = "https://github.com/compiler-explorer/compiler-explorer/actions/workflows/test-and-deploy.yml"
+MESSAGE = "Please grab a recent 'dist.zip' from $GITHUB_ACTIONS and place it at '$PIXI_PROJECT_ROOT'."
 
-[feature.cuda.dependencies]
-cuda-cudart = "*"
-cuda-nvrtc = "*"
-cuda-nvvm-tools = "*"
-
-[feature.cuda.target.linux-64.dependencies]
-cuda-cudart-dev_linux-64 = "*"
-
-[feature.cuda.target.win-64.dependencies]
-# Only Library/lib/x64/cudadevrt.lib can be found by numba
-cuda-cudart-dev_win-64 = ">=13.0.48"
-
-[feature.jinja.tasks._setup]
-cmd = "rm -rf compiler-explorer && python -m _ce_playground"
+[feature.builder.tasks._setup]
+cmd = "rm -rf compiler-explorer && python -m kimnara_playground_builder"
 depends-on = ["_prepare"]
-inputs = ["dist.zip"]
+inputs = ["dist.zip", "pixi.lock"]
 outputs = [
+    "compiler-explorer/discovered-compilers.json",
     "compiler-explorer/etc/config/c.local.properties",
     "compiler-explorer/etc/config/c++.local.properties",
     "compiler-explorer/etc/config/numba.local.properties",
-    "compiler-explorer/etc/config/versionFlag.py",
     "compiler-explorer/etc/config/versionFlag.txt",
-    "compiler-explorer/etc/scripts/numba_wrapper.py",
     "compiler-explorer/release_build",
 ]
 
-[feature.jinja.dependencies]
-minijinja = ">=2.8.0"
-packaging = ">=23.2.0"
-python = ">=3.14.0"
-py-rattler = ">=0.21.0"
-
-[feature.jq.tasks._inspect]
-cmd = "gojq -cn '$ENV'"
-
-[feature.jq.dependencies]
-gojq = ">=0.8.0"
-
 [feature.node.tasks.start]
-cmd = "node app.js"
+cmd = "node app.js --prediscovered discovered-compilers.json"
 cwd = "compiler-explorer"
 depends-on = ["_setup"]
 env = { NODE_ENV = "production" }
@@ -86,19 +124,6 @@ env = { NODE_ENV = "production" }
 linux-64.dependencies.nodejs = "26.*"
 osx-64.dependencies.nodejs = "24.*"
 win-64.dependencies.nodejs = "26.*"
-
-[feature.pixi]
-channels = ["conda-forge", "https://prefix.dev/github-releases"]
-target.linux-64.dependencies.pixi = { version = ">=0.68.0,<0.71.0", channel = "conda-forge" }
-target.osx-64.dependencies.pixi = { version = ">=0.68.0,<0.71.0", channel = "https://prefix.dev/github-releases" }
-target.win-64.dependencies.pixi = { version = ">=0.68.0,<0.71.0", channel = "conda-forge" }
-
-[feature.prepare.tasks._prepare]
-cmd = 'pixi i -a && test -f dist.zip && exit 0; echo "$MESSAGE"; exit 1'
-
-[feature.prepare.tasks._prepare.env]
-GITHUB_ACTIONS = "https://github.com/compiler-explorer/compiler-explorer/actions/workflows/test-and-deploy.yml"
-MESSAGE = "Please grab a recent 'dist.zip' from $GITHUB_ACTIONS and place it at '$PIXI_PROJECT_ROOT'."
 
 ## C/C++ compilers
 
@@ -114,25 +139,10 @@ clangxx = ">=19.1.0"
 llvm-tools = "*"
 vs_win-64 = ">=2026.1.0"
 
-[feature.clang.target.win-64.activation.env]
-CC = "clang"
-CXX = "clang++"
-
-[feature.gcc]
-platforms = ["linux-64", "win-64"]
-
-[feature.gcc.target.linux-64.dependencies]
-gxx_linux-64 = ">=14.1.0"
-
-[feature.gcc.target.win-64.dependencies]
-gxx_win-64 = ">=14.1.0"
-m2-findutils = "*"
-m2-sed = "*"
-m2-which = "*"
-
-[feature.gcc.target.win-64.tasks._inspect2]
-cmd = "bash -elc scripts/inspect.sh"
-env = { CHERE_INVOKING = "1", MSYS2_PATH_TYPE = "inherit" }
+[feature.gcc.target]
+linux-64.dependencies.gxx_linux-64 = ">=14.1.0"
+osx-64.dependencies.gxx_osx-64 = ">=14.1.0"
+win-64.dependencies.gxx_win-64 = ">=14.1.0"
 
 [feature.intel]
 platforms = ["linux-64", "win-64"]
@@ -155,78 +165,46 @@ vs_win-64 = ">=2026.1.0"
 
 ## Numba
 
-[feature.numba.dependencies]
-conda-build = "*"
-libblas = { build = "*_mkl" }
-psutil = "*"
-scipy = "*"
+[feature]
+nb058.dependencies.numba = "==0.58.1"
+nb059.dependencies.numba = "==0.59.1"
+nb060.dependencies.numba = "==0.60.0"
+nb061.dependencies.numba = "==0.61.2"
+nb062.dependencies.numba = "==0.62.1"
+nb063 = { dependencies.numba = "==0.63.1", platforms = ["linux-64", "win-64"] }
+nb064 = { dependencies.numba = "==0.64.0", platforms = ["linux-64", "win-64"] }
+nb065 = { dependencies.numba = "==0.65.1", platforms = ["linux-64", "win-64"] }
+nb066 = { dependencies.numba = "==0.66.0", platforms = ["linux-64", "win-64"] }
+nb067 = { dependencies.numba = "0.67.*", platforms = ["linux-64", "win-64"] }
 
 [feature.nb057]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.57.1", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.57.1", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.57.1", channel = "numba" }
+channels = ["conda-forge", "numba", "https://software.repos.intel.com/python/conda"]
 
-[feature.nb058]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.58.1", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.58.1", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.58.1", channel = "numba" }
+[feature.nb057.target.linux-64.dependencies]
+numba = { version = "==0.57.1", channel = "conda-forge" }
 
-[feature.nb059]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.59.1", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.59.1", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.59.1", channel = "numba" }
+[feature.nb057.target.osx-64.dependencies]
+icc_rt = { channel = "numba" }
+llvmlite = { channel = "numba" }
+numba = { version = "==0.57.1", channel = "numba" }
 
-[feature.nb060]
-channels = ["conda-forge", "numba"]
-target.linux-64.dependencies.numba = { version = "==0.60.0", channel = "conda-forge" }
-target.osx-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
-target.win-64.dependencies.numba = { version = "==0.60.0", channel = "numba" }
+[feature.nb057.target.win-64.dependencies]
+intel-cmplr-lib-rt = { channel = "conda-forge" }
+llvmlite = { channel = "numba" }
+numba = { version = "==0.57.1", channel = "numba" }
+tbb = { channel = "https://software.repos.intel.com/python/conda" }
 
-[feature.nb061]
-dependencies.numba = "==0.61.2"
-
-[feature.nb062]
-dependencies.numba = "==0.62.1"
-
-[feature.nb063]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.63.1"
-
-[feature.nb064]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.64.0"
-
-[feature.nb065]
-platforms = ["linux-64", "win-64"]
-dependencies.numba = "==0.65.1"
-
-[feature.nb066]
-channels = ["numba"]
-platforms = ["linux-64", "win-64"]
-dependencies.llvmlite = { channel = "numba" }
-dependencies.numba = { version = "0.66.*", channel = "numba" }
+[feature.numba.dependencies]
+kimnara-playground-runner = { path = "packages/kimnara-playground-runner" }
+libblas = { build = "*_mkl" }
+psutil = "*"
 
 [feature.pyomp]
 channels = ["Python-for-HPC"]
-target.linux-64.dependencies.pyomp = { version = ">=0.4.0", channel = "Python-for-HPC" }
+target.linux-64.dependencies.pyomp = { version = ">=0.3.2", channel = "Python-for-HPC" }
 
-[feature.pyomp-legacy]
-channels = ["conda-forge", "numba", "Python-for-HPC"]
-
-[feature.pyomp-legacy.target.linux-64.dependencies]
-conda = { version = ">=25.9.0", channel = "conda-forge" }
-llvmlite = { channel = "conda-forge" }
-pyomp = { version = ">=0.3.2", channel = "Python-for-HPC" }
-
-[feature.pyomp-legacy.target.osx-64.dependencies]
-conda = { version = "<24.9.0", channel = "conda-forge" }
-icc_rt = { channel = "numba" }
-llvmlite = { channel = "numba" }
-
-[feature.pyomp-legacy.target.win-64.dependencies]
-conda = { version = "<24.9.0", channel = "conda-forge" }
-intel-cmplr-lib-rt = { channel = "conda-forge" }
-llvmlite = { channel = "numba" }
+[feature.svml]
+channels = ["conda-forge", "numba"]
+target.linux-64.dependencies.intel-cmplr-lib-rt.channel = "conda-forge"
+target.osx-64.dependencies.icc_rt.channel = "numba"
+target.win-64.dependencies.intel-cmplr-lib-rt.channel = "conda-forge"

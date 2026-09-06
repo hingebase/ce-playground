@@ -1,0 +1,37 @@
+package:
+  name: ${{ load_from_file("Cargo.toml").package.name }}
+  version: ${{ load_from_file("Cargo.toml").package.version }}
+
+source:
+  path: .
+  filter:
+    exclude:
+      - target
+
+build:
+  number: 0
+  script:
+    content:
+      - if: win
+        then: cargo install --force --locked --no-track --path . --root "%LIBRARY_PREFIX%"
+        else: cargo install --force --locked --no-track --path . --root "$PREFIX"
+    env:
+      CARGO_HOME: ${{ env.get("CARGO_HOME", default="") }}
+
+requirements:
+  build:
+    - ${{ compiler("c") }}
+    - rust >=1.98.0
+    - ${{ stdlib("c") }}
+    - if: microarch_level | int
+      then: x86_64-microarch-level ==${{ microarch_level }}
+  run:
+    - python
+  ignore_run_exports:
+    by_name:
+      - __osx
+
+about:
+  homepage: ${{ load_from_file("Cargo.toml").package.homepage }}
+  license: ${{ load_from_file("Cargo.toml").package.license }}
+  repository: ${{ load_from_file("Cargo.toml").package.repository }}

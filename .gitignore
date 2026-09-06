@@ -6,5 +6,5 @@
 /compiler-explorer
 /dist.zip
 
-# Python
-/_ce_playground/__pycache__
+# rust-analyzer
+target
