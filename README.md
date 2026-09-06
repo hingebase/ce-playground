@@ -15,6 +15,7 @@ Dump the assembly of Kimnara functions decorated with one of
 - `@kn.cfunc(nopython=True, ...)`
 - `@kn.ufunc(nopython=True, parallel=False, ...)`
 - `@kn.gufunc(nopython=True, parallel=False, ...)`
+
 by assigning their `.dispatcher` to module-level variables. Example:
 ``` py
 import kimnara as kn
